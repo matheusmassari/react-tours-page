@@ -5,7 +5,7 @@ function Tours({ tours }) {
   return (
     <>
       <div className="title">
-        <h2>our tours</h2>
+        <h2>tours pelo maranhão</h2>
         <div className="underline"></div>
       </div>
       <div>{tours.map((tour) => {
