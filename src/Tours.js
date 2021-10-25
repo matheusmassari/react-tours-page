@@ -1,7 +1,7 @@
 import React from "react";
 import Tour from "./Tour";
 
-function Tours({ tours }) {
+function Tours({ tours, removeTour }) {
   return (
     <>
       <div className="title">
@@ -9,7 +9,7 @@ function Tours({ tours }) {
         <div className="underline"></div>
       </div>
       <div>{tours.map((tour) => {
-        return <Tour key={tour.id} {...tour}></Tour>
+        return <Tour key={tour.id} {...tour} removeTour={removeTour}></Tour>
       })}</div>
     </>
   );

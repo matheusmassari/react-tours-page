@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import Tours from "./Tours";
 
-const url = "https://condescending-albattani-37c551.netlify.app/.netlify/functions/api/massari-tours";
+const url =
+  "https://condescending-albattani-37c551.netlify.app/.netlify/functions/api/massari-tours";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [tours, setTours] = useState([]);
+
+  function removeTour(id) {
+    const newTours = tours.filter((tour) => tour.id !== id);
+    setTours(newTours);
+  }
 
   useEffect(() => {
     fetchTours();
@@ -24,7 +30,7 @@ function App() {
       console.log(err);
     }
   };
-  console.log(url)
+  console.log(url);
   if (loading) {
     return (
       <main>
@@ -32,9 +38,19 @@ function App() {
       </main>
     );
   }
+  if (tours.length < 1) {
+    return (
+      <main>
+        <div className="title">
+          <h3>Não sobraram tours {`:(`}</h3>
+          <button className='btn' onClick={fetchTours}>Recarregar</button>
+        </div>
+      </main>
+    );
+  }
   return (
     <main>
-      <Tours tours={tours} />
+      <Tours tours={tours} removeTour={removeTour} />
     </main>
   );
 }
